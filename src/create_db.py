@@ -1,5 +1,7 @@
 from database import engine, Base
 
+from models.model import Base
+
 
 print('Criando database')
 

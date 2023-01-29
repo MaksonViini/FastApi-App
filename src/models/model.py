@@ -1,6 +1,7 @@
+from typing import List
+
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.types import Date
-from typing import List
 
 # Retirar os dois pontos para executar o create_db
 from ..database import Base, get_db

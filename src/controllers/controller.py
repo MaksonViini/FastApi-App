@@ -1,12 +1,10 @@
 from fastapi import APIRouter, Depends
-from starlette.responses import RedirectResponse
 from sqlalchemy.orm import Session
-
-from ..schemas import schema
-from ..models.model import Record
+from starlette.responses import RedirectResponse
 
 from ..database import get_db
-
+from ..models.model import Record
+from ..schemas import schema
 
 router = APIRouter(
     prefix="/api",

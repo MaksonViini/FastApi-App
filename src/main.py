@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .controllers import controller
 
-
 app = FastAPI()
 
 app.add_middleware(

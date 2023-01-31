@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from starlette.responses import RedirectResponse
 
 from ..database import get_db
-from ..models.model import Record
+from ..models.model import RecordModel
 from ..schemas import schema
 
 router = APIRouter(
@@ -18,21 +18,21 @@ class Basic:
     async def main():
         return RedirectResponse(url="/docs/")
 
-    @router.get("/hello")
+    @router.get("/healthchecker")
     async def hello_world():
-        return {"hello": "ok"}, 200
+        return {"Ping": "Pong"}, 200
 
 
 class Records:
 
     @router.get("/records")
     async def show_records(db: Session = Depends(get_db)):
-        return db.query(Record).all()
+        return db.query(RecordModel).all()
 
     @router.post("/records")
-    async def create_record(details: schema.Record, db: Session = Depends(get_db)):
+    async def create_record(details: schema.RecordEntity, db: Session = Depends(get_db)):
 
-        to_create = Record(
+        to_create = RecordModel(
             id=details.id,
             date="1/17/2017",
             country=details.country,
@@ -50,15 +50,15 @@ class Records:
         }
 
     @router.put('/records/{id}')
-    async def update(id: int, details: schema.Record, db: Session = Depends(get_db)):
+    async def update(id: int, details: schema.RecordEntity, db: Session = Depends(get_db)):
         to_update = {
-            Record.date: details.date,
-            Record.country: details.country,
-            Record.cases: details.cases,
-            Record.deaths: details.deaths,
-            Record.recoveries: details.recoveries
+            RecordModel.date: details.date,
+            RecordModel.country: details.country,
+            RecordModel.cases: details.cases,
+            RecordModel.deaths: details.deaths,
+            RecordModel.recoveries: details.recoveries
         }
-        db.query(Record).filter(Record.id == id).update(
+        db.query(RecordModel).filter(RecordModel.id == id).update(
             to_update, synchronize_session=False)
 
         db.commit()

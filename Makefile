@@ -5,11 +5,11 @@ install:
 	@pip install -r dev-requirements.txt
 format:
 	@isort .
-	autopep8 $(git ls-files '**.py*') --in-place
+	# autopep8 $(git ls-files '**.py*') --in-place
 lint:
 	@isort . --check
 	@prospector . --with-tool pep257 --doc-warning
 test:
-	@pytest -v
+	@pytest -v test/
 security:
 	@pip-audit

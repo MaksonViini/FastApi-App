@@ -9,7 +9,7 @@ from ..database import Base, get_db
 db = get_db()
 
 
-class Record(Base):
+class RecordModel(Base):
     __tablename__ = "Records"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -20,11 +20,11 @@ class Record(Base):
     recoveries = Column(Integer)
 
     @classmethod
-    def find_by_id(cls, _id: int) -> 'Record':
+    def find_by_id(cls, _id: int) -> 'RecordModel':
         return cls.query.filter_by(id=_id).first()
 
     @classmethod
-    def find_all(cls) -> List['Record']:
+    def find_all(cls) -> List['RecordModel']:
         return cls.query.all()
 
     def save_to_db(self) -> None:

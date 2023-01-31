@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class Record(BaseModel):
+class RecordEntity(BaseModel):
     id: int
     country: str
     cases: int
